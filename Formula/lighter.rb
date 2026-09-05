@@ -12,8 +12,8 @@
 class Lighter < Formula
   desc "Docker for macOS, on a virtual machine built for it"
   homepage "https://github.com/fieldwork-ai/lighter"
-  url "https://github.com/fieldwork-ai/lighter/releases/download/v0.1.0/lighter-0.1.0-arm64.tar.gz"
-  sha256 "79505ffeeb3c41ee4f56a7bb9f4094d5db896150730f310d0ace0cbb1325429e"
+  url "https://github.com/fieldwork-ai/lighter/releases/download/v0.3.0/lighter-0.3.0-arm64.tar.gz"
+  sha256 "efac26746b3466c2fbee11caad203ce0a2fbb7db433135c8ef1a73e300242f4e"
   license "MIT"
 
   # Apple Silicon only, and not by omission: there is no Intel path and there
@@ -25,7 +25,6 @@ class Lighter < Formula
 
   def install
     bin.install "bin/lighter"
-    libexec.install "bin/gvproxy"
     pkgshare.install Dir["share/lighter/*"]
     prefix.install "LICENSE", "README.md"
   end
