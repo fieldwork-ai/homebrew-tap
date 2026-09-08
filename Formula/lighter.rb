@@ -13,7 +13,7 @@ class Lighter < Formula
   homepage "https://github.com/fieldwork-ai/lighter"
   url "https://github.com/fieldwork-ai/lighter/releases/download/v0.5.1/lighter-0.5.1-arm64.tar.gz"
   version "0.5.1"
-  sha256 "d362b9e7b6ec275e9d16b633968716dda9f40f35f76b43631b1145a5b82f81ea"
+  sha256 "414ba7f95f9cde1b895d7aa5982d9d5791882359b49b06c6ad2682454092169b"
   license any_of: ["MIT", "Apache-2.0"]
 
   # Apple Silicon only, and not by omission: there is no Intel path and there
