@@ -23,11 +23,11 @@ jobs:
           tap_dir="$(brew --repository)/Library/Taps/fieldwork-ai/homebrew-tap"
           mkdir -p "$(dirname "$tap_dir")"
           ln -s "$GITHUB_WORKSPACE" "$tap_dir"
-      # The formula keeps `post_install` behind a RuboCop directive on purpose
-      # (see the comment above it), and Homebrew's style config forbids the
-      # directive itself; that one cop is excluded so the check reports real
-      # problems rather than the exemption.
+      # The formula uses `post_install` on purpose (see the comment above it).
+      # Whether Homebrew's InstallSteps cop objects depends on the Homebrew
+      # version, so it is excluded here rather than with an in-file directive,
+      # which a version that does not object then flags as redundant.
       - name: brew style
-        run: brew style --except-cops Style/DisableCopsWithinSourceCodeDirective fieldwork-ai/tap
+        run: brew style --except-cops FormulaAudit/InstallSteps fieldwork-ai/tap
       - name: brew audit
         run: brew audit --strict --online --skip-style fieldwork-ai/tap/lighter
