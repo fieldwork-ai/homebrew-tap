@@ -1,0 +1,33 @@
+name: formula
+
+# The tap ships metadata only (download URLs, versions, checksums), so the one
+# thing worth checking on every change is that the formula is well-formed and
+# installable: `brew style` for syntax and conventions, `brew audit --strict`
+# for the checksum, URL and licence fields. A broken formula here breaks
+# `brew install fieldwork-ai/tap/lighter` for everyone.
+
+on:
+  pull_request:
+    paths: ["Formula/**", ".github/workflows/formula.yml"]
+  push:
+    branches: [main]
+    paths: ["Formula/**", ".github/workflows/formula.yml"]
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tap this checkout
+        run: |
+          tap_dir="$(brew --repository)/Library/Taps/fieldwork-ai/homebrew-tap"
+          mkdir -p "$(dirname "$tap_dir")"
+          ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+      # The formula uses `post_install` on purpose (see the comment above it).
+      # Whether Homebrew's InstallSteps cop objects depends on the Homebrew
+      # version, so it is excluded here rather than with an in-file directive,
+      # which a version that does not object then flags as redundant.
+      - name: brew style
+        run: brew style --except-cops FormulaAudit/InstallSteps fieldwork-ai/tap
+      - name: brew audit
+        run: brew audit --strict --online --skip-style fieldwork-ai/tap/lighter
