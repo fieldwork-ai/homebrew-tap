@@ -23,6 +23,10 @@ jobs:
           tap_dir="$(brew --repository)/Library/Taps/fieldwork-ai/homebrew-tap"
           mkdir -p "$(dirname "$tap_dir")"
           ln -s "$GITHUB_WORKSPACE" "$tap_dir"
+      # Homebrew 7 loads nothing from a tap that has not been trusted, and the
+      # runner's is a symlinked checkout nobody has trusted.
+      - name: Trust this tap
+        run: brew trust fieldwork-ai/tap
       # The formula uses `post_install` on purpose (see the comment above it).
       # Whether Homebrew's InstallSteps cop objects depends on the Homebrew
       # version, so it is excluded here rather than with an in-file directive,

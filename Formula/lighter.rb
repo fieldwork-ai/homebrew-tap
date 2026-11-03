@@ -11,8 +11,8 @@
 class Lighter < Formula
   desc "Docker for macOS, on a virtual machine built for it"
   homepage "https://github.com/fieldwork-ai/lighter"
-  url "https://github.com/fieldwork-ai/lighter/releases/download/v0.13.8/lighter-0.13.8-arm64.tar.gz"
-  sha256 "d8e7b1b2d982f5a8f0e574b1934bae3d2fe17006458b0b4ba9243e1aa8d7f04e"
+  url "https://github.com/fieldwork-ai/lighter/releases/download/v0.13.9/lighter-0.13.9-arm64.tar.gz"
+  sha256 "f5b77fac2e25fc36c845bb6a90f2662ca8c6cd1914b0167df8f740b805e6d0a6"
   license any_of: ["MIT", "Apache-2.0"]
 
   # Apple Silicon only, and not by omission: there is no Intel path and there
@@ -25,7 +25,7 @@ class Lighter < Formula
   def install
     bin.install "bin/lighter"
     pkgshare.install Dir["share/lighter/*"]
-    prefix.install "LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "README.md"
+    prefix.install "LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "THIRD-PARTY-NOTICES", "README.md"
   end
 
   # Ownership includes a digest of the final canonical Cellar path. This is
